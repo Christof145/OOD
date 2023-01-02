@@ -34,6 +34,7 @@ public class MenuController extends MenuBar {
 	protected static final String NEXT = "Next";
 	protected static final String OPEN = "Open";
 	protected static final String PAGENR = "Page number?";
+	protected static final String GOTOINPUT = "Save file as:";
 	protected static final String PREV = "Prev";
 	protected static final String SAVE = "Save";
 	protected static final String VIEW = "View";
@@ -76,8 +77,15 @@ public class MenuController extends MenuBar {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Accessor xmlAccessor = new XMLAccessor();
+				String userInput = JOptionPane.showInputDialog(GOTOINPUT, null);
 				try {
-					xmlAccessor.saveFile(presentation, SAVEFILE);
+					if (userInput == null || userInput.equals("")){
+						JOptionPane.showMessageDialog(parent, "File not saved!",
+								SAVEERR, JOptionPane.ERROR_MESSAGE);
+					} else {
+						String fileSaveName = userInput + ".xml";
+						xmlAccessor.saveFile(presentation, fileSaveName);
+					}
 				} catch (IOException exc) {
 					JOptionPane.showMessageDialog(parent, IOEX + exc, 
 							SAVEERR, JOptionPane.ERROR_MESSAGE);
