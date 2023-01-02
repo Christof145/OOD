@@ -110,7 +110,11 @@ public class MenuController extends MenuBar {
 			public void actionPerformed(ActionEvent actionEvent) {
 				String pageNumberStr = JOptionPane.showInputDialog((Object)PAGENR);
 				int pageNumber = Integer.parseInt(pageNumberStr);
-				presentation.setSlideNumber(pageNumber - 1);
+				if (pageNumber > presentation.getSize() || pageNumber < 0){
+					JOptionPane.showMessageDialog(parent, "Page unavailiable");
+				}else {
+					presentation.setSlideNumber(pageNumber - 1);
+				}
 			}
 		});
 		add(viewMenu);
