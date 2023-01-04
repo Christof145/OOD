@@ -1,10 +1,5 @@
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
+import java.awt.*;
+import javax.swing.*;
 
 
 /** <p>SlideViewerComponent is a graphical component that ca display Slides.</p>
@@ -17,28 +12,24 @@ import javax.swing.JFrame;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class SlideViewerComponent extends JComponent {
+public class SlideViewerComponent extends JComponent implements FontBuilder{
 		
 	private Slide slide; //The current slide
-	private Font labelFont = null; //The font for labels
 	private Presentation presentation = null; //The presentation
 	private JFrame frame = null;
 	
 	private static final long serialVersionUID = 227L;
 	
 	private static final Color BGCOLOR = Color.white;
-	private static final Color COLOR = Color.black;
-	private static final String FONTNAME = "Dialog";
-	private static final int FONTSTYLE = Font.BOLD;
-	private static final int FONTHEIGHT = 10;
+	private CustomFont customFont;
 	private static final int XPOS = 1100;
 	private static final int YPOS = 20;
 
 	public SlideViewerComponent(Presentation pres, JFrame frame) {
 		setBackground(BGCOLOR); 
 		presentation = pres;
-		labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);
 		this.frame = frame;
+		createFont(Color.BLACK, "Dialog", Font.BOLD, 10);
 	}
 
 	public Dimension getPreferredSize() {
@@ -63,11 +54,16 @@ public class SlideViewerComponent extends JComponent {
 		if (presentation.getSlideNumber() < 0 || slide == null) {
 			return;
 		}
-		g.setFont(labelFont);
-		g.setColor(COLOR);
+		g.setFont(customFont);
+		g.setColor(customFont.getColor());
 		g.drawString("Slide " + (1 + presentation.getSlideNumber()) + " of " +
                  presentation.getSize(), XPOS, YPOS);
 		Rectangle area = new Rectangle(0, YPOS, getWidth(), (getHeight() - YPOS));
 		slide.draw(g, area, this);
+	}
+
+	@Override
+	public CustomFont createFont(Color color, String fontName, int fontStyle, int fontHeight) {
+		return customFont = new CustomFont(color, fontName, fontStyle, fontHeight);
 	}
 }
