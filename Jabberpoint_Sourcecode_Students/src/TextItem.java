@@ -26,11 +26,18 @@ import java.util.ArrayList;
 
 public class TextItem extends SlideItem {
 	private String text;
+	
+	private static final String EMPTYTEXT = "No Text Given";
 
-	//A textitem of int level with text string
+//A textitem of int level with text string
 	public TextItem(int level, String string) {
 		super(level);
 		text = string;
+	}
+
+//An empty textitem
+	public TextItem() {
+		this(0, EMPTYTEXT);
 	}
 
 //Returns the text
@@ -86,7 +93,7 @@ public class TextItem extends SlideItem {
 	  }
 
 	private List<TextLayout> getLayouts(Graphics g, Style s, float scale) {
-		List<TextLayout> layouts = new ArrayList<>();
+		List<TextLayout> layouts = new ArrayList<TextLayout>();
 		AttributedString attrStr = getAttributedString(s, scale);
     	Graphics2D g2d = (Graphics2D) g;
     	FontRenderContext frc = g2d.getFontRenderContext();

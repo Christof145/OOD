@@ -20,7 +20,7 @@ public class Slide {
 	protected Vector<SlideItem> items; //The SlideItems are kept in a vector
 
 	public Slide() {
-		items = new Vector<>();
+		items = new Vector<SlideItem>();
 	}
 
 	//Add a SlideItem
@@ -45,7 +45,7 @@ public class Slide {
 
 	//Returns the SlideItem
 	public SlideItem getSlideItem(int number) {
-		return items.elementAt(number);
+		return (SlideItem)items.elementAt(number);
 	}
 
 	//Return all the SlideItems in a vector
@@ -68,7 +68,7 @@ public class Slide {
 	    slideItem.draw(area.x, y, scale, g, style, view);
 	    y += slideItem.getBoundingBox(g, view, scale, style).height;
 	    for (int number=0; number<getSize(); number++) {
-	      slideItem = getSlideItems().elementAt(number);
+	      slideItem = (SlideItem)getSlideItems().elementAt(number);
 	      style = Style.getStyle(slideItem.getLevel());
 	      slideItem.draw(area.x, y, scale, g, style, view);
 	      y += slideItem.getBoundingBox(g, view, scale, style).height;

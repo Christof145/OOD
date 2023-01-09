@@ -74,7 +74,7 @@ public class Presentation {
 
 	//Remove the presentation
 	void clear() {
-		showList = new ArrayList<>();
+		showList = new ArrayList<Slide>();
 		setSlideNumber(-1);
 	}
 
@@ -88,7 +88,7 @@ public class Presentation {
 		if (number < 0 || number >= getSize()){
 			return null;
 	    }
-			return showList.get(number);
+			return (Slide)showList.get(number);
 	}
 
 	//Return the current slide

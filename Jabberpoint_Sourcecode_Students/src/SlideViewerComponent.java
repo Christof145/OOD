@@ -15,8 +15,8 @@ import javax.swing.*;
 public class SlideViewerComponent extends JComponent implements FontBuilder{
 		
 	private Slide slide; //The current slide
-	private Presentation presentation; //The presentation
-	private JFrame frame;
+	private Presentation presentation = null; //The presentation
+	private JFrame frame = null;
 	
 	private static final long serialVersionUID = 227L;
 	

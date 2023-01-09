@@ -20,6 +20,10 @@ public abstract class SlideItem {
 		level = lev;
 	}
 
+	public SlideItem() {
+		this(0);
+	}
+
 //Returns the level
 	public int getLevel() {
 		return level;
