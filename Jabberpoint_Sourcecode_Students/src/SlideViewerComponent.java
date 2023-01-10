@@ -66,4 +66,8 @@ public class SlideViewerComponent extends JComponent implements FontBuilder{
 	public CustomFont createFont(Color color, String fontName, int fontStyle, int fontHeight) {
 		return customFont = new CustomFont(color, fontName, fontStyle, fontHeight);
 	}
+
+	public Presentation getPresentation() {
+		return presentation;
+	}
 }

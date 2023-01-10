@@ -1,5 +1,7 @@
 import javax.swing.JOptionPane;
 
+import java.awt.*;
+import java.awt.Menu;
 import java.io.IOException;
 
 /** JabberPoint Main Program
