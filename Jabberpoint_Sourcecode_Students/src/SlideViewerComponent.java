@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 
@@ -47,7 +48,31 @@ public class SlideViewerComponent extends JComponent implements FontBuilder{
 		frame.setTitle(presentation.getTitle());
 	}
 
-//Draw the slide
+	public void setSlideNumber(int number) {
+		this.presentation.setCurrentSlideNumber(number);
+			this.update(presentation, presentation.getCurrentSlide());
+	}
+
+	//Navigate to the previous slide unless we are at the first slide
+	public void prevSlide() {
+		if (presentation.getSlideNumber() > 0) {
+			setSlideNumber(presentation.getSlideNumber() - 1);
+		}
+	}
+
+	//Navigate to the next slide unless we are at the last slide
+	public void nextSlide() {
+		if (presentation.getSlideNumber() < (presentation.getSize()-1)) {
+			setSlideNumber(presentation.getSlideNumber() + 1);
+		}
+	}
+
+	//Remove the presentation
+	void clear() {
+		setSlideNumber(-1);
+	}
+
+	//Draw the slide
 	public void paintComponent(Graphics g) {
 		g.setColor(BGCOLOR);
 		g.fillRect(0, 0, getSize().width, getSize().height);

@@ -20,12 +20,13 @@ public class SlideViewerFrame extends JFrame {
 	private static final String JABTITLE = "Jabberpoint 1.6 - OU";
 	public final static int WIDTH = 1200;
 	public final static int HEIGHT = 800;
-	
+	private SlideViewerComponent slideViewerComponent;
+
 	public SlideViewerFrame(String title, Presentation presentation) {
 		super(title);
-		SlideViewerComponent slideViewerComponent = new SlideViewerComponent(presentation, this);
+		this.slideViewerComponent = new SlideViewerComponent(presentation, this);
 		presentation.setShowView(slideViewerComponent);
-		setupWindow(slideViewerComponent, presentation);
+		setupWindow(slideViewerComponent, slideViewerComponent.getPresentation());
 	}
 
 //Setup the GUI
@@ -38,9 +39,13 @@ public class SlideViewerFrame extends JFrame {
 				}
 			});
 		getContentPane().add(slideViewerComponent);
-		addKeyListener(new KeyController(presentation)); //Add a controller
-		setMenuBar(new MenuController(this, slideViewerComponent.getPresentation()));	//Add another controller
+		addKeyListener(new KeyController(slideViewerComponent)); //Add a controller
+		setMenuBar(new MenuController(this, slideViewerComponent));	//Add another controller
 		setSize(new Dimension(WIDTH, HEIGHT)); //Same sizes a slide has
 		setVisible(true);
+	}
+
+	public SlideViewerComponent getSlideViewerComponent() {
+		return this.slideViewerComponent;
 	}
 }
