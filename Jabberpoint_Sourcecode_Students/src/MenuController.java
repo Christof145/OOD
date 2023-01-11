@@ -35,7 +35,6 @@ public class MenuController extends MenuBar {
 	protected static final String NEXT = "Next";
 	protected static final String OPEN = "Open";
 	protected static final String PAGENR = "Page number?";
-	protected static final String GOTOINPUT = "Save file as:";
 	protected static final String PREV = "Prev";
 	protected static final String SAVE = "Save";
 	protected static final String VIEW = "View";
@@ -61,7 +60,7 @@ public class MenuController extends MenuBar {
 					xmlAccessor.loadFile(slideViewerComponent.getPresentation(), TESTFILE);
 					slideViewerComponent.setSlideNumber(0);
 				} catch (IOException exc) {
-					JOptionPane.showMessageDialog(parent, IOEX + exc, 
+					JOptionPane.showMessageDialog(parent, IOEX + exc,
          			LOADERR, JOptionPane.ERROR_MESSAGE);
 				}
 				parent.repaint();
@@ -78,15 +77,8 @@ public class MenuController extends MenuBar {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Accessor xmlAccessor = new XMLAccessor();
-				String userInput = JOptionPane.showInputDialog(GOTOINPUT, null);
 				try {
-					if (userInput == null || userInput.equals("")){
-						JOptionPane.showMessageDialog(parent, "File not saved!",
-								SAVEERR, JOptionPane.ERROR_MESSAGE);
-					} else {
-						String fileSaveName = userInput + ".xml";
-						xmlAccessor.saveFile(slideViewerComponent.getPresentation(), fileSaveName);
-					}
+					xmlAccessor.saveFile(slideViewerComponent.getPresentation(), SAVEFILE);
 				} catch (IOException exc) {
 					JOptionPane.showMessageDialog(parent, IOEX + exc, 
 							SAVEERR, JOptionPane.ERROR_MESSAGE);
