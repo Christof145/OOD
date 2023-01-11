@@ -17,14 +17,8 @@ public class Presentation {
 	private String showTitle; //The title of the presentation
 	private ArrayList<Slide> showList = new ArrayList<>(); //An ArrayList with slides
 	private int currentSlideNumber = 0; //The number of the current slide
-	private SlideViewerComponent slideViewComponent = null; //The view component of the slides
 
 	public Presentation() {
-		slideViewComponent = null;
-	}
-
-	public Presentation(SlideViewerComponent slideViewerComponent) {
-		this.slideViewComponent = slideViewerComponent;
 	}
 
 	public int getSize() {
@@ -43,10 +37,6 @@ public class Presentation {
 		showTitle = nt;
 	}
 
-	public void setShowView(SlideViewerComponent slideViewerComponent) {
-		this.slideViewComponent = slideViewerComponent;
-	}
-
 	public ArrayList<Slide> getShowList() {
 		return showList;
 	}
@@ -55,8 +45,6 @@ public class Presentation {
 	public int getSlideNumber() {
 		return currentSlideNumber;
 	}
-
-
 
 	//Add a slide to the presentation
 	public void append(Slide slide) {
