@@ -69,6 +69,7 @@ public class SlideViewerComponent extends JComponent implements FontBuilder{
 
 	//Remove the presentation
 	void clear() {
+		presentation.getShowList().clear();
 		setSlideNumber(-1);
 	}
 
