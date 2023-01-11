@@ -120,8 +120,6 @@ public class MenuController extends MenuBar {
 				String pageNumberStr = JOptionPane.showInputDialog((Object)PAGENR);
 				int pageNumber = Integer.parseInt(pageNumberStr);
 				if (pageNumber > slideViewerComponent.getPresentation().getSize() || pageNumber < 0){
-					JOptionPane.showMessageDialog(parent, "Page unavailiable");
-				}else {
 					slideViewerComponent.setSlideNumber(pageNumber - 1);
 				}
 			}
