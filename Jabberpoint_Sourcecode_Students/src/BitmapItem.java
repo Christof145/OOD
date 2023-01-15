@@ -22,7 +22,7 @@ import java.io.IOException;
 
 public class BitmapItem extends SlideItem {
   private BufferedImage bufferedImage;
-  private String imageName;
+  private final String imageName;
   
   protected static final String FILE = "File ";
   protected static final String NOTFOUND = " not found";
@@ -38,11 +38,6 @@ public class BitmapItem extends SlideItem {
 		catch (IOException e) {
 			System.err.println(FILE + imageName + NOTFOUND) ;
 		}
-	}
-
-	//An empty bitmap item
-	public BitmapItem() {
-		this(0, null);
 	}
 
 	//Returns the filename of the image

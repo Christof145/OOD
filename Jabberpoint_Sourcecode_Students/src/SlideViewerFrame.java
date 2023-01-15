@@ -20,7 +20,7 @@ public class SlideViewerFrame extends JFrame {
 	private static final String JABTITLE = "Jabberpoint 1.6 - OU";
 	public final static int WIDTH = 1200;
 	public final static int HEIGHT = 800;
-	private SlideViewerComponent slideViewerComponent;
+	private final SlideViewerComponent slideViewerComponent;
 
 	public SlideViewerFrame(String title, Presentation presentation) {
 		super(title);

@@ -25,7 +25,7 @@ import java.util.ArrayList;
  */
 
 public class TextItem extends SlideItem {
-	private String text;
+	private final String text;
 	
 	private static final String EMPTYTEXT = "No Text Given";
 
