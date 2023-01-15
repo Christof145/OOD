@@ -22,7 +22,8 @@ public class MenuController extends MenuBar {
 	
 	private Frame parent; //The frame, only used as parent for the Dialogs
 	private Presentation presentation; //Commands are given to the presentation
-	
+	private SlideViewerComponent slideViewerComponent;
+
 	private static final long serialVersionUID = 227L;
 	
 	protected static final String ABOUT = "About";
@@ -34,7 +35,6 @@ public class MenuController extends MenuBar {
 	protected static final String NEXT = "Next";
 	protected static final String OPEN = "Open";
 	protected static final String PAGENR = "Page number?";
-	protected static final String GOTOINPUT = "Save file as:";
 	protected static final String PREV = "Prev";
 	protected static final String SAVE = "Save";
 	protected static final String VIEW = "View";
@@ -46,21 +46,21 @@ public class MenuController extends MenuBar {
 	protected static final String LOADERR = "Load Error";
 	protected static final String SAVEERR = "Save Error";
 
-	public MenuController(Frame frame, Presentation pres) {
+	public MenuController(Frame frame, SlideViewerComponent slideViewerComponent) {
 		parent = frame;
-		presentation = pres;
+		this.slideViewerComponent = slideViewerComponent;
 		MenuItem menuItem;
 		Menu fileMenu = new Menu(FILE);
 		fileMenu.add(menuItem = mkMenuItem(OPEN));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.clear();
+				slideViewerComponent.clear();
 				Accessor xmlAccessor = new XMLAccessor();
 				try {
-					xmlAccessor.loadFile(presentation, TESTFILE);
-					presentation.setSlideNumber(0);
+					xmlAccessor.loadFile(slideViewerComponent.getPresentation(), TESTFILE);
+					slideViewerComponent.setSlideNumber(0);
 				} catch (IOException exc) {
-					JOptionPane.showMessageDialog(parent, IOEX + exc, 
+					JOptionPane.showMessageDialog(parent, IOEX + exc,
          			LOADERR, JOptionPane.ERROR_MESSAGE);
 				}
 				parent.repaint();
@@ -69,7 +69,7 @@ public class MenuController extends MenuBar {
 		fileMenu.add(menuItem = mkMenuItem(NEW));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.clear();
+				slideViewerComponent.clear();
 				parent.repaint();
 			}
 		});
@@ -77,15 +77,8 @@ public class MenuController extends MenuBar {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Accessor xmlAccessor = new XMLAccessor();
-				String userInput = JOptionPane.showInputDialog(GOTOINPUT, null);
 				try {
-					if (userInput == null || userInput.equals("")){
-						JOptionPane.showMessageDialog(parent, "File not saved!",
-								SAVEERR, JOptionPane.ERROR_MESSAGE);
-					} else {
-						String fileSaveName = userInput + ".xml";
-						xmlAccessor.saveFile(presentation, fileSaveName);
-					}
+					xmlAccessor.saveFile(slideViewerComponent.getPresentation(), SAVEFILE);
 				} catch (IOException exc) {
 					JOptionPane.showMessageDialog(parent, IOEX + exc, 
 							SAVEERR, JOptionPane.ERROR_MESSAGE);
@@ -96,7 +89,7 @@ public class MenuController extends MenuBar {
 		fileMenu.add(menuItem = mkMenuItem(EXIT));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.exit(0);
+				slideViewerComponent.getPresentation().exit(0);
 			}
 		});
 		add(fileMenu);
@@ -104,13 +97,13 @@ public class MenuController extends MenuBar {
 		viewMenu.add(menuItem = mkMenuItem(NEXT));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.nextSlide();
+				slideViewerComponent.nextSlide();
 			}
 		});
 		viewMenu.add(menuItem = mkMenuItem(PREV));
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				presentation.prevSlide();
+				slideViewerComponent.prevSlide();
 			}
 		});
 		viewMenu.add(menuItem = mkMenuItem(GOTO));
@@ -118,10 +111,8 @@ public class MenuController extends MenuBar {
 			public void actionPerformed(ActionEvent actionEvent) {
 				String pageNumberStr = JOptionPane.showInputDialog((Object)PAGENR);
 				int pageNumber = Integer.parseInt(pageNumberStr);
-				if (pageNumber > presentation.getSize() || pageNumber < 0){
-					JOptionPane.showMessageDialog(parent, "Page unavailiable");
-				}else {
-					presentation.setSlideNumber(pageNumber - 1);
+				if (pageNumber > slideViewerComponent.getPresentation().getSize() || pageNumber < 0){
+					slideViewerComponent.setSlideNumber(pageNumber - 1);
 				}
 			}
 		});
