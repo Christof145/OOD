@@ -52,6 +52,7 @@ public class XMLAccessor implements Accessor {
     	
     }
 
+	@Override
 	public void loadFile(Presentation presentation, String filename) throws IOException {
 		int slideNumber, itemNumber, max = 0, maxItems = 0;
 		try {
@@ -113,6 +114,7 @@ public class XMLAccessor implements Accessor {
 		}
 	}
 
+	@Override
 	public void saveFile(Presentation presentation, String filename) throws IOException {
 		PrintWriter out = new PrintWriter(new FileWriter(filename));
 		out.println("<?xml version=\"1.0\"?>");
