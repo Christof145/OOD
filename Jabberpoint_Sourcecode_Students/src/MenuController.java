@@ -22,7 +22,6 @@ public class MenuController extends MenuBar {
 	
 	private Frame parent; //The frame, only used as parent for the Dialogs
 	private Presentation presentation; //Commands are given to the presentation
-	private SlideViewerComponent slideViewerComponent;
 
 	private static final long serialVersionUID = 227L;
 	
@@ -48,7 +47,6 @@ public class MenuController extends MenuBar {
 
 	public MenuController(Frame frame, SlideViewerComponent slideViewerComponent) {
 		parent = frame;
-		this.slideViewerComponent = slideViewerComponent;
 		MenuItem menuItem;
 		Menu fileMenu = new Menu(FILE);
 		fileMenu.add(menuItem = mkMenuItem(OPEN));
@@ -111,7 +109,7 @@ public class MenuController extends MenuBar {
 			public void actionPerformed(ActionEvent actionEvent) {
 				String pageNumberStr = JOptionPane.showInputDialog((Object)PAGENR);
 				int pageNumber = Integer.parseInt(pageNumberStr);
-				if (pageNumber > slideViewerComponent.getPresentation().getSize() || pageNumber < 0){
+				if (pageNumber < slideViewerComponent.getPresentation().getSize() || pageNumber > 0){
 					slideViewerComponent.setSlideNumber(pageNumber - 1);
 				}
 			}
