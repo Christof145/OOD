@@ -25,12 +25,12 @@ public class SlideViewerFrame extends JFrame {
 	public SlideViewerFrame(String title, Presentation presentation) {
 		super(title);
 		this.slideViewerComponent = new SlideViewerComponent(presentation, this);
-		setupWindow(slideViewerComponent, slideViewerComponent.getPresentation());
+		setupWindow(slideViewerComponent);
 	}
 
 //Setup the GUI
-	public void setupWindow(SlideViewerComponent 
-			slideViewerComponent, Presentation presentation) {
+	public void setupWindow(SlideViewerComponent
+									slideViewerComponent) {
 		setTitle(JABTITLE);
 		addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
